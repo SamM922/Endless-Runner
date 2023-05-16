@@ -33,14 +33,14 @@ class Play extends Phaser.Scene {
         // Score
         this.scoreText = this.add.text(game.config.width / 2, game.config.height / 12, 'Yards: ' + this.score, textConfig).setOrigin(0, 0);
         this.highScoreText = this.add.text(game.config.width / 1.4, game.config.height / 12, 'High: ' + this.highScore, textConfig).setOrigin(0, 0);
-        // Player
-        this.RB = new RB(this, game.config.width / 100, game.config.height / 2.5, 'RB').setOrigin(0, 0);
         // Controls
-        keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-        keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-        keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+        keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+        keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         keyM = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+        // Player
+        this.RB = new RB(this, game.config.width / 100, game.config.height / 2.5, 'RB').setOrigin(0, 0);
     }
 
     update() {
