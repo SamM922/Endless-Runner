@@ -15,6 +15,6 @@ let config = {
 let game = new Phaser.Game(config);
 // Control vars
 let keyR, keyM, keyUP, keyDOWN, keyRIGHT;
-// UI sizes
-let borderUISize = game.config.height / 15;
-let borderPadding = borderUISize / 3;
+// UI values
+let separationVal = game.config.height / 10;
+let separationVal2 = separationVal / 3;
