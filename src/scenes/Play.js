@@ -46,7 +46,7 @@ class Play extends Phaser.Scene {
 
     // Collision detection from different project I am part of, most of this code was written by Brannon Eakles: https://github.com/beakles/game-project
     checkCollision(object1, object2) {
-        if (object1.x < object2.x + object2.width - 20 && object1.x + object1.width > object2.x - 30 && object1.y < object2.y + object2.height - 15 && object1.height + object1.y > object2.y + 15) {
+        if (object1.x < object2.x + object2.width - 20 && object1.x + object1.width > object2.x && object1.y < object2.y + object2.height - 15 && object1.height + object1.y > object2.y + 15) {
             return true;
         }
         return false;
@@ -69,16 +69,30 @@ class Play extends Phaser.Scene {
             } else {
                 this.scoreCounter += 1;
             }
+            // Update difficulty
+            if (this.score % 15 == 0 && this.scoreCounter == 0 && game.settings.spawnSpeed >= 3) {
+                game.settings.spawnSpeed -= 1;
+            }
+            if (this.score % 25 == 0 && this.scoreCounter == 0 && game.settings.defenderSpeed <= 4) {
+                game.settings.defenderSpeed += 0.5;
+            }
+            if (this.score % 30 == 0 && this.scoreCounter == 0 && game.settings.maxDefenders <= 5) {
+                game.settings.maxDefenders += 1;
+            }
             // Scroll Background
             this.field.tilePositionX += 1;
             // Enemies
-            if (this.defArray.length < 3 && this.scoreCounter % 50 == 0 && Phaser.Math.Between(1, game.settings.spawnSpeed) == 1) {
+            // Array logic idea also from Brannon Eakles: https://github.com/beakles/game-project
+            if (this.defArray.length < game.settings.maxDefenders && this.scoreCounter % 33 == 0 && Phaser.Math.Between(1, game.settings.spawnSpeed) <= 2) {
                 let newDef = new Defender(this, game.config.width, Phaser.Math.Between(0, game.config.height), 'defender');
                 this.defArray.push(newDef);
             }
             for (let i = 0; i < this.defArray.length; i++) {
                 let currentDef = this.defArray[i];
                 if (this.checkCollision(currentDef, this.RB)) {
+                    if (this.score > this.highScore) {
+                        this.highScore = this.score;
+                    }
                     this.gameOver = true;
                     let textConfig = {
                         fontFamily: 'Consolas',

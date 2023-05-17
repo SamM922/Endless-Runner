@@ -6,7 +6,7 @@ class RB extends Phaser.GameObjects.Sprite {
 
     update() {
         // Movement up and down
-        if (keyUP.isDown && this.y >= 0) {
+        if (keyUP.isDown && this.y >= this.width) {
             this.y -= 2;
         } else if (keyDOWN.isDown && this.y <= game.config.height - this.width) {
             this.y += 2;
