@@ -25,7 +25,7 @@ class Menu extends Phaser.Scene {
         }
         this.add.text(game.config.width/2, game.config.height/2 - separationVal - separationVal2, 'Running Back: Endless Yards', menuConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2, 'Use UP and DOWN arrow keys to dodge defenders', menuConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2 + separationVal + separationVal2, 'Hold RIGHT arrow for BLOCKER, R to snap the ball!', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + separationVal + separationVal2, 'Hold RIGHT arrow for BLOCKER, press R to start!', menuConfig).setOrigin(0.5);
     }
 
     update() {
