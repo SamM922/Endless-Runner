@@ -5,6 +5,6 @@ class Defender extends Phaser.GameObjects.Sprite {
     }
 
     update() {
-        
+        this.x -= game.settings.defenderSpeed;
     }
 }

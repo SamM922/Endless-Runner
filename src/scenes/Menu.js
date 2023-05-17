@@ -30,6 +30,10 @@ class Menu extends Phaser.Scene {
 
     update() {
         if (Phaser.Input.Keyboard.JustDown(keyR)) {
+            game.settings = {
+                defenderSpeed: 1,
+                spawnSpeed: 10
+            }
             this.scene.start('playScene');
         }
     }
