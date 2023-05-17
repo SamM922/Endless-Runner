@@ -5,6 +5,12 @@ class Menu extends Phaser.Scene {
     
     preload() {
         this.load.image('field', './assets/field.png');
+        // Music from Ross Bugden: https://www.youtube.com/watch?v=VPHAmrUTX1w
+        this.load.audio('music', './assets/music.mp3');
+        this.load.audio('hike', './assets/hike.mp3');
+        // Whistle from https://freesound.org/s/418564/
+        this.load.audio('whistle', './assets/whistle.mp3');
+        this.load.audio('block', './assets/block.wav');
     }
 
     create() {
@@ -35,6 +41,7 @@ class Menu extends Phaser.Scene {
                 spawnSpeed: 10,
                 maxDefenders: 3
             }
+            this.sound.play('hike');
             this.scene.start('playScene');
         }
     }

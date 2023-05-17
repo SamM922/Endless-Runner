@@ -16,6 +16,9 @@ class Play extends Phaser.Scene {
         this.score = 0;
         this.gameOver = false;
         this.canBlock = true;
+        this.bgMusic = this.sound.add('music', {volume: 0.3});
+        this.bgMusic.setLoop(true);
+        this.bgMusic.play();
         // Background
         this.field = this.add.tileSprite(0, 0, 640, 480, 'field').setOrigin(0, 0);
         // Text config
@@ -121,27 +124,12 @@ class Play extends Phaser.Scene {
                 let currentDef = this.defArray[i];
                 // Game over check
                 if (this.checkCollision(currentDef, this.RB)) {
-                    if (this.score > this.highScore) {
-                        this.highScore = this.score;
-                    }
-                    this.gameOver = true;
-                    let textConfig = {
-                        fontFamily: 'Consolas',
-                        fontSize: '24px',
-                        backgroundColor: '#0022ff',
-                        color: '#ffffff',
-                        align: 'right',
-                        padding: {
-                            top: 5,
-                            bottom: 5,
-                        },
-                        fixedWidth: 0
-                    }
-                    this.add.text(game.config.width / 2, game.config.height / 2, 'Tackled! R to run again, M for Menu', textConfig).setOrigin(0.5);
+                    this.endGame();
                 }
                 // Hit blocker check
                 if (this.checkCollision(currentDef, this.blocker) && this.blocker.visible) {
                     this.canBlock = false;
+                    this.sound.play('block');
                     currentDef.destroy();
                     this.defArray.splice(i, 1);
                 }
@@ -153,5 +141,27 @@ class Play extends Phaser.Scene {
                 currentDef.update();
             }
         }
+    }
+
+    endGame() {
+        if (this.score > this.highScore) {
+            this.highScore = this.score;
+        }
+        this.gameOver = true;
+        this.bgMusic.stop();
+        this.sound.play('whistle');
+        let textConfig = {
+            fontFamily: 'Consolas',
+            fontSize: '24px',
+            backgroundColor: '#0022ff',
+            color: '#ffffff',
+            align: 'right',
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 0
+        }
+        this.add.text(game.config.width / 2, game.config.height / 2, 'Tackled! R to run again, M for Menu', textConfig).setOrigin(0.5);
     }
 }
